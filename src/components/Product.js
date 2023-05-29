@@ -6,7 +6,8 @@ const Product = (props) => {
   const { cart, setCart } = useContext(ProductContext);
 
   const addItem = () => {
-    setCart([...cart, props.product]);
+    if (!cart.find((item) => item.id === props.product.id))
+      setCart([...cart, props.product]);
   };
 
   return (
