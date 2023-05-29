@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Route } from "react-router-dom";
-import { data } from "./data";
-
+import { ProductContext } from "./context/ProductContext";
 // Bileşenler
 import Navigation from "./components/Navigation";
 import Products from "./components/Products";
 import ShoppingCart from "./components/ShoppingCart";
 
 function App() {
-  const [products, setProducts] = useState(data);
-  const [cart, setCart] = useState([]);
+  const { products, cart, setCart, setProducts } = useContext(ProductContext);
 
   const addItem = (item) => {
+    setCart([...cart, item]);
     // verilen itemi sepete ekleyin
   };
 
@@ -22,7 +21,7 @@ function App() {
       {/* Routelar */}
       <main className="content">
         <Route exact path="/">
-          <Products products={products} addItem={addItem} />
+          <Products />
         </Route>
 
         <Route path="/cart">
